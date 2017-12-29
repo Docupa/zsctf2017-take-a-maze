@@ -137,747 +137,747 @@ char mov[] = "delru0123456789";
 //--------------------------------------check debug------------------------------------------------------
 bool isdbg()
 {
-	bool a;
-	if (IsDebuggerPresent())
-		return 1;
-	else
-		return 0;
+    bool a;
+    if (IsDebuggerPresent())
+        return 1;
+    else
+        return 0;
 }
 //-------------------------------------------------------------------------------------------------------
 void delay(int a)
 {
-	time_t start, end;
-	time(&start);
-	time(&end);
-	while (difftime(end, start) < a)
-	{
-		time(&end);
-	}
+    time_t start, end;
+    time(&start);
+    time(&end);
+    while (difftime(end, start) < a)
+    {
+        time(&end);
+    }
 }
 void print_ticket()
 {
-	printf("\noh,wait! Take your ticket\n");
-	printf("printing ticket ...\n");
-	delay(2);
-	printf("printing ticket ....\n");
-	delay(2);
-	printf("printing ticket .....\n");
-	delay(2);
-	printf("printing ticket ......\n");
-	delay(2);
-	printf("printing ticket .......\n");
-	delay(2);
-	printf("printing ticket ........\n");
-	delay(2);
-	printf("printing ticket .........\n");
-	delay(2);
-	printf("printing ticket ..........\n");
-	delay(2);
-	printf("printing ticket ...........\n");
-	delay(2);
-	printf("printing ticket ............\n");
-	delay(2);
-	printf("printing ticket .............\n\n\n");
-	FILE *fp;
-	fp = fopen("flag.png", "wb");
-	fwrite(p,1,1930, fp);
-	fclose(fp);
-	printf("print finished,view the path to this file,you will get a png file,have a good time\n\n\n");
-	system("pause");
+    printf("\noh,wait! Take your ticket\n");
+    printf("printing ticket ...\n");
+    delay(2);
+    printf("printing ticket ....\n");
+    delay(2);
+    printf("printing ticket .....\n");
+    delay(2);
+    printf("printing ticket ......\n");
+    delay(2);
+    printf("printing ticket .......\n");
+    delay(2);
+    printf("printing ticket ........\n");
+    delay(2);
+    printf("printing ticket .........\n");
+    delay(2);
+    printf("printing ticket ..........\n");
+    delay(2);
+    printf("printing ticket ...........\n");
+    delay(2);
+    printf("printing ticket ............\n");
+    delay(2);
+    printf("printing ticket .............\n\n\n");
+    FILE *fp;
+    fp = fopen("flag.png", "wb");
+    fwrite(p,1,1930, fp);
+    fclose(fp);
+    printf("print finished,view the path to this file,you will get a png file,have a good time\n\n\n");
+    system("pause");
 }
 
 void sorry()
 {
-	printf("key error\n");
-	system("pause");
+    printf("key error\n");
+    system("pause");
 }
 
 //---------------------------------maze_move---------------------------------------
 void down(int *num,int k2)
 {
-	int sum = *num;
-	while (k2--)
-	{
-		int r;
-		if (sum / 26 > 10)
-			return;
-		r = p1[sum + 26] ^ p2[sum + 26];
-		if (r)
-			return;
-		sum += 26;
-	}
-	*num = sum;
+    int sum = *num;
+    while (k2--)
+    {
+        int r;
+        if (sum / 26 > 10)
+            return;
+        r = p1[sum + 26] ^ p2[sum + 26];
+        if (r)
+            return;
+        sum += 26;
+    }
+    *num = sum;
 }
 
 void up(int *num, int k2)
 {
-	int sum = *num;
-	while (k2--)
-	{
-		int r;
-		if (sum / 26 < 1)
-			return;
-		r = p1[sum - 26] ^ p2[sum - 26];
-		if (r)
-			return;
-		sum -= 26;
-	}
-	*num = sum;
+    int sum = *num;
+    while (k2--)
+    {
+        int r;
+        if (sum / 26 < 1)
+            return;
+        r = p1[sum - 26] ^ p2[sum - 26];
+        if (r)
+            return;
+        sum -= 26;
+    }
+    *num = sum;
 }
 
 void left(int *num, int k2)
 {
-	int sum = *num;
-	while (k2--)
-	{
-		int r;
-		if (sum % 26 < 1)
-			return;
-		r = p1[sum - 1] ^ p2[sum - 1];
-		if (r)
-			return;
-		sum -= 1;
-	}
-	*num = sum;
+    int sum = *num;
+    while (k2--)
+    {
+        int r;
+        if (sum % 26 < 1)
+            return;
+        r = p1[sum - 1] ^ p2[sum - 1];
+        if (r)
+            return;
+        sum -= 1;
+    }
+    *num = sum;
 }
 
 void right(int *num, int k2)
 {
-	int sum = *num;
-	while (k2--)
-	{
-		int r;
-		if (sum % 26 > 24)
-			return;
-		r = p1[sum + 1] ^ p2[sum + 1];
-		if (r)
-			return;
-		sum+= 1;
-	}
-	*num = sum;
+    int sum = *num;
+    while (k2--)
+    {
+        int r;
+        if (sum % 26 > 24)
+            return;
+        r = p1[sum + 1] ^ p2[sum + 1];
+        if (r)
+            return;
+        sum+= 1;
+    }
+    *num = sum;
 }
 //-----------------------------------------------------------------------------
 
 int maze_game(char *key)
 {
-	int n=0,k1,k2,nn=0,sum=0;
-	while (n++ < 12)
-	{
-		if (isdbg())
-			exit(0);
-		switch (key[nn++])
-		{
-			case '0':k1=0;break;
-			case '1':k1 = 1;break;
-			case '2':k1 = 2;break;
-			case '3':k1 = 3;break;
-			case '4':k1 = 4;break;
-			default:return 0;
-		}
-		switch (key[nn++])
-		{
-			case '5':k2 = 5;break;
-			case '6':k2 = 6;break;
-			case '7':k2 = 7;break;
-			case '8':k2 = 8;break;
-			case '9':k2 = 9;break;
-			case 'a':k2 = 10;break;
-			case 'b':k2 = 11;break;
-			case 'c':k2 = 12;break;
-			case 'd':k2 = 13;break;
-			case 'e':k2 = 14;break;
-			case 'f':k2 = 15;break;
-			default:return 0;
-		}
-		switch (mov[k1])                                                
-		{
-			case 'd':down(&sum,mov[k2]-'0');break;
-			case 'u':up(&sum, mov[k2] - '0');break;
-			case 'l':left(&sum, mov[k2] - '0');break;
-			case 'r':right(&sum, mov[k2] - '0');break;
-			default:return 0;
-		}
-	}
-	if (sum == 311)
-		return 1;
-	return 0;
+    int n=0,k1,k2,nn=0,sum=0;
+    while (n++ < 12)
+    {
+        if (isdbg())
+            exit(0);
+        switch (key[nn++])
+        {
+            case '0':k1=0;break;
+            case '1':k1 = 1;break;
+            case '2':k1 = 2;break;
+            case '3':k1 = 3;break;
+            case '4':k1 = 4;break;
+            default:return 0;
+        }
+        switch (key[nn++])
+        {
+            case '5':k2 = 5;break;
+            case '6':k2 = 6;break;
+            case '7':k2 = 7;break;
+            case '8':k2 = 8;break;
+            case '9':k2 = 9;break;
+            case 'a':k2 = 10;break;
+            case 'b':k2 = 11;break;
+            case 'c':k2 = 12;break;
+            case 'd':k2 = 13;break;
+            case 'e':k2 = 14;break;
+            case 'f':k2 = 15;break;
+            default:return 0;
+        }
+        switch (mov[k1])                                                
+        {
+            case 'd':down(&sum,mov[k2]-'0');break;
+            case 'u':up(&sum, mov[k2] - '0');break;
+            case 'l':left(&sum, mov[k2] - '0');break;
+            case 'r':right(&sum, mov[k2] - '0');break;
+            default:return 0;
+        }
+    }
+    if (sum == 311)
+        return 1;
+    return 0;
 }
 
 //-----------------------------------vm----------------------------------------------
 unsigned int std_opc_value(unsigned int **vm, unsigned int addr, unsigned int size, unsigned int value)
 {
-	unsigned int mask;
-	switch (size)
-	{
-	case 1:
-		mask = 0xff;
-		break;;
-	case 2:
-		mask = 0xffff;
-		break;;
-	case 4:
-		mask = 0xffffffff;
-		break;;
-	default:
-		mask = 0;
-	}
-	*(unsigned int *)((char *)*vm + addr) ^= (*(unsigned int *)((char *)*vm + addr) & mask) ^ (value & mask);
-	return(value);
+    unsigned int mask;
+    switch (size)
+    {
+    case 1:
+        mask = 0xff;
+        break;;
+    case 2:
+        mask = 0xffff;
+        break;;
+    case 4:
+        mask = 0xffffffff;
+        break;;
+    default:
+        mask = 0;
+    }
+    *(unsigned int *)((char *)*vm + addr) ^= (*(unsigned int *)((char *)*vm + addr) & mask) ^ (value & mask);
+    return(value);
 }
 
 
 unsigned int get_mem_value(unsigned int **vm, unsigned int addr, unsigned int size)
 {
-	unsigned int	value = 0;
-	unsigned int	mask;
-	switch (size)
-	{
-	case 1:
-		mask = 0xff;
-		break;;
-	case 2:
-		mask = 0xffff;
-		break;;
-	case 4:
-		mask = 0xffffffff;
-		break;;
-	default:
-		mask = 0;
-	}
-	value = *(unsigned int *)((char *)vm[3] + addr) & mask;
-	return(value);
+    unsigned int    value = 0;
+    unsigned int    mask;
+    switch (size)
+    {
+    case 1:
+        mask = 0xff;
+        break;;
+    case 2:
+        mask = 0xffff;
+        break;;
+    case 4:
+        mask = 0xffffffff;
+        break;;
+    default:
+        mask = 0;
+    }
+    value = *(unsigned int *)((char *)vm[3] + addr) & mask;
+    return(value);
 }
 
 
 unsigned int std_mem_value(unsigned int **vm, unsigned int addr, unsigned int size, unsigned int value)
 {
-	unsigned int mask;
-	switch (size)
-	{
-	case 1:
-		mask = 0xff;
-		break;;
-	case 2:
-		mask = 0xffff;
-		break;;
-	case 4:
-		mask = 0xffffffff;
-		break;;
-	default:
-		mask = 0;
-	}
-	*(unsigned int *)((char *)vm[3] + addr) ^= (*(unsigned int *)((char *)vm[3] + addr) & mask) ^ (value & mask);
-	return(value);
+    unsigned int mask;
+    switch (size)
+    {
+    case 1:
+        mask = 0xff;
+        break;;
+    case 2:
+        mask = 0xffff;
+        break;;
+    case 4:
+        mask = 0xffffffff;
+        break;;
+    default:
+        mask = 0;
+    }
+    *(unsigned int *)((char *)vm[3] + addr) ^= (*(unsigned int *)((char *)vm[3] + addr) & mask) ^ (value & mask);
+    return(value);
 }
 
 
 unsigned int cmp_value(unsigned int **vm, unsigned int value1, unsigned int value2)
 {
-	if (value1 == value2)
-	{
-		*(*(vm + 1) + 7) = 1;
-	}
-	else if (value1 > value2)
-	{
-		*(*(vm + 1) + 7) = 2;
-	}
-	else {
-		*(*(vm + 1) + 7) = 0;
-	}
-	return(value1);
+    if (value1 == value2)
+    {
+        *(*(vm + 1) + 7) = 1;
+    }
+    else if (value1 > value2)
+    {
+        *(*(vm + 1) + 7) = 2;
+    }
+    else {
+        *(*(vm + 1) + 7) = 0;
+    }
+    return(value1);
 }
 
 
 unsigned int get_reg_value(unsigned int **vm, unsigned int idx, unsigned int size)
 {
-	unsigned int	value = 0;
-	unsigned int	mask;
-	if (idx < 8)
-	{
-		switch (size)
-		{
-		case 1:
-			mask = 0xff;
-			break;;
-		case 2:
-			mask = 0xffff;
-			break;;
-		case 4:
-			mask = 0xffffffff;
-			break;;
-		default:
-			mask = 0;
-		}
-		value = vm[1][idx] & mask;
-	}
-	return(value);
+    unsigned int    value = 0;
+    unsigned int    mask;
+    if (idx < 8)
+    {
+        switch (size)
+        {
+        case 1:
+            mask = 0xff;
+            break;;
+        case 2:
+            mask = 0xffff;
+            break;;
+        case 4:
+            mask = 0xffffffff;
+            break;;
+        default:
+            mask = 0;
+        }
+        value = vm[1][idx] & mask;
+    }
+    return(value);
 }
 
 
 unsigned int std_reg_value(unsigned int **vm, unsigned int idx, unsigned int size, unsigned int value)
 {
-	unsigned int mask;
-	if (idx < 8)
-	{
-		switch (size)
-		{
-		case 1:
-			mask = 0xff;
-			break;;
-		case 2:
-			mask = 0xffff;
-			break;;
-		case 4:
-			mask = 0xffffffff;
-			break;;
-		default:
-			mask = 0;
-		}
-		vm[1][idx] ^= (vm[1][idx] & mask) ^ (value & mask);
-	}
-	return(value);
+    unsigned int mask;
+    if (idx < 8)
+    {
+        switch (size)
+        {
+        case 1:
+            mask = 0xff;
+            break;;
+        case 2:
+            mask = 0xffff;
+            break;;
+        case 4:
+            mask = 0xffffffff;
+            break;;
+        default:
+            mask = 0;
+        }
+        vm[1][idx] ^= (vm[1][idx] & mask) ^ (value & mask);
+    }
+    return(value);
 }
 
 
 unsigned int push(unsigned int **vm, unsigned int value)
 {
-	*(vm + 2) -= 4;
-	*vm[2] = value;
-	return(value);
+    *(vm + 2) -= 4;
+    *vm[2] = value;
+    return(value);
 }
 
 
 unsigned int pop(unsigned int **vm)
 {
-	unsigned int *value = vm[2];
-	*(vm + 2) += 4;
-	return(*value);
+    unsigned int *value = vm[2];
+    *(vm + 2) += 4;
+    return(*value);
 }
 
 
 unsigned int reg_add(unsigned int **vm, unsigned int reg1, unsigned int reg2)
 {
-	unsigned int	v1 = get_reg_value(vm, reg1, 4);
-	unsigned int	v2 = get_reg_value(vm, reg2, 4);
-	return(std_reg_value(vm, reg1, 4, v1 + v2));
+    unsigned int    v1 = get_reg_value(vm, reg1, 4);
+    unsigned int    v2 = get_reg_value(vm, reg2, 4);
+    return(std_reg_value(vm, reg1, 4, v1 + v2));
 }
 
 
 unsigned int reg_sub(unsigned int **vm, unsigned int reg1, unsigned int reg2)
 {
-	unsigned int	v1 = get_reg_value(vm, reg1, 4);
-	unsigned int	v2 = get_reg_value(vm, reg2, 4);
-	return(std_reg_value(vm, reg1, 4, v1 - v2));
+    unsigned int    v1 = get_reg_value(vm, reg1, 4);
+    unsigned int    v2 = get_reg_value(vm, reg2, 4);
+    return(std_reg_value(vm, reg1, 4, v1 - v2));
 }
 
 
 unsigned int reg_mul(unsigned int **vm, unsigned int reg1, unsigned int reg2)
 {
-	unsigned int	v1 = get_reg_value(vm, reg1, 4);
-	unsigned int	v2 = get_reg_value(vm, reg2, 4);
-	return(std_reg_value(vm, reg1, 4, v1 * v2));
+    unsigned int    v1 = get_reg_value(vm, reg1, 4);
+    unsigned int    v2 = get_reg_value(vm, reg2, 4);
+    return(std_reg_value(vm, reg1, 4, v1 * v2));
 }
 
 
 unsigned int reg_div(unsigned int **vm, unsigned int reg1, unsigned int reg2)
 {
-	unsigned int	v1 = get_reg_value(vm, reg1, 4);
-	unsigned int	v2 = get_reg_value(vm, reg2, 4);
-	return(std_reg_value(vm, reg1, 4, v1 / v2));
+    unsigned int    v1 = get_reg_value(vm, reg1, 4);
+    unsigned int    v2 = get_reg_value(vm, reg2, 4);
+    return(std_reg_value(vm, reg1, 4, v1 / v2));
 }
 
 
 unsigned int reg_and(unsigned int **vm, unsigned int reg1, unsigned int reg2)
 {
-	unsigned int	v1 = get_reg_value(vm, reg1, 4);
-	unsigned int	v2 = get_reg_value(vm, reg2, 4);
-	return(std_reg_value(vm, reg1, 4, v1 & v2));
+    unsigned int    v1 = get_reg_value(vm, reg1, 4);
+    unsigned int    v2 = get_reg_value(vm, reg2, 4);
+    return(std_reg_value(vm, reg1, 4, v1 & v2));
 }
 
 
 unsigned int reg_or(unsigned int **vm, unsigned int reg1, unsigned int reg2)
 {
-	unsigned int	v1 = get_reg_value(vm, reg1, 4);
-	unsigned int	v2 = get_reg_value(vm, reg2, 4);
-	return(std_reg_value(vm, reg1, 4, v1 | v2));
+    unsigned int    v1 = get_reg_value(vm, reg1, 4);
+    unsigned int    v2 = get_reg_value(vm, reg2, 4);
+    return(std_reg_value(vm, reg1, 4, v1 | v2));
 }
 
 
 unsigned int reg_xor(unsigned int **vm, unsigned int reg1, unsigned int reg2)
 {
-	unsigned int	v1 = get_reg_value(vm, reg1, 4);
-	unsigned int	v2 = get_reg_value(vm, reg2, 4);
-	return(std_reg_value(vm, reg1, 4, v1 ^ v2));
+    unsigned int    v1 = get_reg_value(vm, reg1, 4);
+    unsigned int    v2 = get_reg_value(vm, reg2, 4);
+    return(std_reg_value(vm, reg1, 4, v1 ^ v2));
 }
 
 
 unsigned int reg_cmp(unsigned int **vm, unsigned int reg1, unsigned int reg2)
 {
-	unsigned int	v1 = get_reg_value(vm, reg1, 4);
-	unsigned int	v2 = get_reg_value(vm, reg2, 4);
-	return(cmp_value(vm, v1, v2));
+    unsigned int    v1 = get_reg_value(vm, reg1, 4);
+    unsigned int    v2 = get_reg_value(vm, reg2, 4);
+    return(cmp_value(vm, v1, v2));
 }
 
 
 unsigned int inc_reg(unsigned int **vm, unsigned int reg1)
 {
-	unsigned int v1 = get_reg_value(vm, reg1, 4);
-	*(char *)vm = *(char *)vm - 1;
-	return(std_reg_value(vm, reg1, 4, v1 + 1));
+    unsigned int v1 = get_reg_value(vm, reg1, 4);
+    *(char *)vm = *(char *)vm - 1;
+    return(std_reg_value(vm, reg1, 4, v1 + 1));
 }
 
 
 unsigned int dec_reg(unsigned int **vm, unsigned int reg1)
 {
-	unsigned int v1 = get_reg_value(vm, reg1, 4);
-	*(char *)vm = *(char *)vm - 1;
-	return(std_reg_value(vm, reg1, 4, v1 - 1));
+    unsigned int v1 = get_reg_value(vm, reg1, 4);
+    *(char *)vm = *(char *)vm - 1;
+    return(std_reg_value(vm, reg1, 4, v1 - 1));
 }
 
 
 unsigned int push_imm(unsigned int **vm, unsigned int value)
 {
-	*(char *)vm = *(char *)vm + 2;
-	return(push(vm, value));
+    *(char *)vm = *(char *)vm + 2;
+    return(push(vm, value));
 }
 
 
 unsigned int push_reg(unsigned int **vm, unsigned int reg1)
 {
-	unsigned int v1 = get_reg_value(vm, reg1, 4);
-	*(char *)vm = *(char *)vm - 1;
-	return(push(vm, v1));
+    unsigned int v1 = get_reg_value(vm, reg1, 4);
+    *(char *)vm = *(char *)vm - 1;
+    return(push(vm, v1));
 }
 
 
 unsigned int pop_reg(unsigned int **vm, unsigned int reg1)
 {
-	unsigned int v1 = pop(vm);
-	*(char *)vm = *(char *)vm - 1;
-	return(std_reg_value(vm, reg1, 4, v1));
+    unsigned int v1 = pop(vm);
+    *(char *)vm = *(char *)vm - 1;
+    return(std_reg_value(vm, reg1, 4, v1));
 }
 
 
 unsigned int reg_mov_reg(unsigned int **vm, unsigned int reg1, unsigned int reg2)
 {
-	unsigned int v2 = get_reg_value(vm, reg2, 4);
-	return(std_reg_value(vm, reg1, 4, v2));
+    unsigned int v2 = get_reg_value(vm, reg2, 4);
+    return(std_reg_value(vm, reg1, 4, v2));
 }
 
 
 unsigned int mem_mov_reg(unsigned int **vm, unsigned int reg1, unsigned int addr, unsigned int size)
 {
-	unsigned int v2 = get_mem_value(vm, addr, size);
-	*(char *)vm = *(char *)vm + 3;
-	return(std_reg_value(vm, reg1, size, v2));
+    unsigned int v2 = get_mem_value(vm, addr, size);
+    *(char *)vm = *(char *)vm + 3;
+    return(std_reg_value(vm, reg1, size, v2));
 }
 
 unsigned int nmem_mov_reg(unsigned int **vm, unsigned int reg1, unsigned int addr, unsigned int size)
 {
-	unsigned int n=get_reg_value(vm, addr, size);
-	unsigned int v2 = get_mem_value(vm, n, size);
-	*(char *)vm = *(char *)vm + 3;
-	return(std_reg_value(vm, reg1, size, v2));
+    unsigned int n=get_reg_value(vm, addr, size);
+    unsigned int v2 = get_mem_value(vm, n, size);
+    *(char *)vm = *(char *)vm + 3;
+    return(std_reg_value(vm, reg1, size, v2));
 }
 
 
 unsigned int reg_mov_mem(unsigned int **vm, unsigned int reg1, unsigned int addr, unsigned int size)
 {
-	unsigned int v1 = get_reg_value(vm, reg1, size);
-	*(char *)vm = *(char *)vm + 3;
-	return(std_mem_value(vm, addr, size, v1));
+    unsigned int v1 = get_reg_value(vm, reg1, size);
+    *(char *)vm = *(char *)vm + 3;
+    return(std_mem_value(vm, addr, size, v1));
 }
 unsigned int reg_mov_nmem(unsigned int **vm, unsigned int reg1, unsigned int addr, unsigned int size)
 {
-	unsigned int n = get_reg_value(vm, addr, size);
-	unsigned int v1 = get_reg_value(vm, reg1, size);
-	*(char *)vm = *(char *)vm + 3;
-	return(std_mem_value(vm, n, size, v1));
+    unsigned int n = get_reg_value(vm, addr, size);
+    unsigned int v1 = get_reg_value(vm, reg1, size);
+    *(char *)vm = *(char *)vm + 3;
+    return(std_mem_value(vm, n, size, v1));
 }
 
 
 unsigned int jmp(unsigned int **vm, unsigned int addr)
 {
-	*(char *)vm = *(char *)vm - addr-3;
-	return(0);
+    *(char *)vm = *(char *)vm - addr-3;
+    return(0);
 }
 
 
 unsigned int je(unsigned int **vm, unsigned int addr)
 {
-	if (*(*(vm + 1) + 7) == 1)
-	{
-		jmp(vm, addr);
-	}
-	else {
-		*(char *)vm = *(char *)vm + 2;
-	}
-	return(0);
+    if (*(*(vm + 1) + 7) == 1)
+    {
+        jmp(vm, addr);
+    }
+    else {
+        *(char *)vm = *(char *)vm + 2;
+    }
+    return(0);
 }
 
 void checkcheck(unsigned int **vm, unsigned int reg1, unsigned int addr, unsigned int size)
 {
-	if (IsDebuggerPresent())
-		exit(0);
+    if (IsDebuggerPresent())
+        exit(0);
 }
 unsigned int jne(unsigned int **vm, unsigned int addr)
 {
-	if (*(*(vm + 1) + 7) != 1)
-	{
-		jmp(vm, addr);
-	}
-	else {
-		*(char *)vm = *(char *)vm + 2;
-	}
-	return(0);
+    if (*(*(vm + 1) + 7) != 1)
+    {
+        jmp(vm, addr);
+    }
+    else {
+        *(char *)vm = *(char *)vm + 2;
+    }
+    return(0);
 }
 
 
 unsigned int jg(unsigned int **vm, unsigned int addr)
 {
-	if (*(*(vm + 1) + 7) == 2)
-	{
-		jmp(vm, addr);
-	}
-	else {
-		*(char *)vm = *(char *)vm + 2;
-	}
-	return(0);
+    if (*(*(vm + 1) + 7) == 2)
+    {
+        jmp(vm, addr);
+    }
+    else {
+        *(char *)vm = *(char *)vm + 2;
+    }
+    return(0);
 }
 
 
 unsigned int jl(unsigned int **vm, unsigned int addr)
 {
-	if (*(*(vm + 1) + 7) == 0)
-	{
-		jmp(vm, addr);
-	}
-	else {
-		*(char *)vm = *(char *)vm + 2;
-	}
-	return(0);
+    if (*(*(vm + 1) + 7) == 0)
+    {
+        jmp(vm, addr);
+    }
+    else {
+        *(char *)vm = *(char *)vm + 2;
+    }
+    return(0);
 }
 
 
 unsigned int jge(unsigned int **vm, unsigned int addr)
 {
-	if (*(*(vm + 1) + 7) >= 1)
-	{
-		jmp(vm, addr);
-	}
-	else {
-		*(char *)vm = *(char *)vm + 2;
-	}
-	return(0);
+    if (*(*(vm + 1) + 7) >= 1)
+    {
+        jmp(vm, addr);
+    }
+    else {
+        *(char *)vm = *(char *)vm + 2;
+    }
+    return(0);
 }
 
 
 unsigned int jle(unsigned int **vm, unsigned int addr)
 {
-	if (*(*(vm + 1) + 7) <= 1)
-	{
-		jmp(vm, addr);
-	}
-	else {
-		*(char *)vm = *(char *)vm + 2;
-	}
-	return(0);
+    if (*(*(vm + 1) + 7) <= 1)
+    {
+        jmp(vm, addr);
+    }
+    else {
+        *(char *)vm = *(char *)vm + 2;
+    }
+    return(0);
 }
 
 
 unsigned int smc(unsigned int **vm, unsigned int reg1, unsigned int size)
 {
-	unsigned int v1 = get_reg_value(vm, reg1, size);
-	*(char *)vm = *(char *)vm - 1;
-	return(std_opc_value(vm, 5, size, v1));
+    unsigned int v1 = get_reg_value(vm, reg1, size);
+    *(char *)vm = *(char *)vm - 1;
+    return(std_opc_value(vm, 5, size, v1));
 }
 
 unsigned char opc[] = { 112,0,0,0,0,5,229,24,0,0,0,0,203,6,0,1,139,0,5,0,0,0,0,46,0,0,0,0,112,0,5,132,0,5,0,0,0,0,12,5,0,195,5,6,0,0,251,30,0,0,0,0,255 };
 
 void vm_handler(unsigned int **vm)
 {
-	unsigned char	code;
-	while (1)
-	{
-		code = vm[0][0];
-		switch (code)
-		{
-		case 193:
-			reg_add(vm, (unsigned int)((char *)*vm)[1], (unsigned int)((char *)*vm)[2]);
-			break;
-		case 133:
-			reg_sub(vm, (unsigned int)((char *)*vm)[1], (unsigned int)((char *)*vm)[2]);
-			break;
-		case 21:
-			reg_mul(vm, (unsigned int)((char *)*vm)[1], (unsigned int)((char *)*vm)[2]);
-			break;
-		case 183:
-			reg_div(vm, (unsigned int)((char *)*vm)[1], (unsigned int)((char *)*vm)[2]);
-			break;
-		case 49:
-			reg_and(vm, (unsigned int)((char *)*vm)[1], (unsigned int)((char *)*vm)[2]);
-			break;
-		case 169:
-			reg_or(vm, (unsigned int)((char *)*vm)[1], (unsigned int)((char *)*vm)[2]);
-			break;
-		case 112:
-			reg_xor(vm, (unsigned int)((char *)*vm)[1], (unsigned int)((char *)*vm)[2]);
-			break;
-		case 195:
-			reg_cmp(vm, (unsigned int)((char *)*vm)[1], (unsigned int)((char *)*vm)[2]);
-			break;
-		case 12:
-			inc_reg(vm, (unsigned int)((char *)*vm)[1]);
-			break;
-		case 160:
-			dec_reg(vm, (unsigned int)((char *)*vm)[1]);
-			break;
-		case 229:
-			push_imm(vm, *(unsigned int *)((char *)*vm + 1));
-			break;
-		case 103:
-			push_reg(vm, (unsigned int)((char *)*vm)[1]);
-			break;
-		case 203:
-			pop_reg(vm, (unsigned int)((char *)*vm)[1]);
-			break;
-		case 45:
-			reg_mov_reg(vm, (unsigned int)((char *)*vm)[1], (unsigned int)((char *)*vm)[2]);
-			break;
-		case 46:
-			checkcheck(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2),1);
-			break;
-		case 138:
-			mem_mov_reg(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 1);
-			break;
-		case 139:
-			nmem_mov_reg(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 1);
-			break;
-		case 242:
-			mem_mov_reg(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 2);
-			break;
-		case 243:
-			nmem_mov_reg(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 2);
-			break;
-		case 254:
-			mem_mov_reg(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 4);
-			break;
-		case 253:
-			nmem_mov_reg(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 4);
-			break;
-		case 131:
-			reg_mov_mem(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 1);
-			break;
-		case 132:
-			reg_mov_nmem(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 1);
-			break;
-		case 233:
-			reg_mov_mem(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 2);
-			break;
-		case 234:
-			reg_mov_nmem(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 2);
-			break;
-		case 153:
-			reg_mov_mem(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 4);
-			break;
-		case 154:
-			reg_mov_nmem(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 4);
-			break;
-		case 172:
-			jmp(vm, *(unsigned int *)((char *)*vm + 1));
-			break;
-		case 20:
-			je(vm, *(unsigned int *)((char *)*vm + 1));
-			break;
-		case 164:
-			jne(vm, *(unsigned int *)((char *)*vm + 1));
-			break;
-		case 54:
-			jg(vm, *(unsigned int *)((char *)*vm + 1));
-			break;
-		case 251:
-			jl(vm, *(unsigned int *)((char *)*vm + 1));
-			break;
-		case 115:
-			jge(vm, *(unsigned int *)((char *)*vm + 1));
-			break;
-		case 42:
-			jle(vm, *(unsigned int *)((char *)*vm + 1));
-			break;
-		case 134:
-			smc(vm, (unsigned int)((char *)*vm)[1], 1);
-			break;
-		case 249:
-			smc(vm, (unsigned int)((char *)*vm)[1], 2);
-			break;
-		case 113:
-			smc(vm, (unsigned int)((char *)*vm)[1], 4);
-			break;
-		case 255:
-			return;
-		default:
-			*(unsigned char *)vm = *(unsigned char *)vm - 2;
-			break;
-		}
-		*(unsigned char *)vm = *(unsigned char *)vm + 3;
-	}
+    unsigned char    code;
+    while (1)
+    {
+        code = vm[0][0];
+        switch (code)
+        {
+        case 193:
+            reg_add(vm, (unsigned int)((char *)*vm)[1], (unsigned int)((char *)*vm)[2]);
+            break;
+        case 133:
+            reg_sub(vm, (unsigned int)((char *)*vm)[1], (unsigned int)((char *)*vm)[2]);
+            break;
+        case 21:
+            reg_mul(vm, (unsigned int)((char *)*vm)[1], (unsigned int)((char *)*vm)[2]);
+            break;
+        case 183:
+            reg_div(vm, (unsigned int)((char *)*vm)[1], (unsigned int)((char *)*vm)[2]);
+            break;
+        case 49:
+            reg_and(vm, (unsigned int)((char *)*vm)[1], (unsigned int)((char *)*vm)[2]);
+            break;
+        case 169:
+            reg_or(vm, (unsigned int)((char *)*vm)[1], (unsigned int)((char *)*vm)[2]);
+            break;
+        case 112:
+            reg_xor(vm, (unsigned int)((char *)*vm)[1], (unsigned int)((char *)*vm)[2]);
+            break;
+        case 195:
+            reg_cmp(vm, (unsigned int)((char *)*vm)[1], (unsigned int)((char *)*vm)[2]);
+            break;
+        case 12:
+            inc_reg(vm, (unsigned int)((char *)*vm)[1]);
+            break;
+        case 160:
+            dec_reg(vm, (unsigned int)((char *)*vm)[1]);
+            break;
+        case 229:
+            push_imm(vm, *(unsigned int *)((char *)*vm + 1));
+            break;
+        case 103:
+            push_reg(vm, (unsigned int)((char *)*vm)[1]);
+            break;
+        case 203:
+            pop_reg(vm, (unsigned int)((char *)*vm)[1]);
+            break;
+        case 45:
+            reg_mov_reg(vm, (unsigned int)((char *)*vm)[1], (unsigned int)((char *)*vm)[2]);
+            break;
+        case 46:
+            checkcheck(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2),1);
+            break;
+        case 138:
+            mem_mov_reg(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 1);
+            break;
+        case 139:
+            nmem_mov_reg(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 1);
+            break;
+        case 242:
+            mem_mov_reg(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 2);
+            break;
+        case 243:
+            nmem_mov_reg(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 2);
+            break;
+        case 254:
+            mem_mov_reg(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 4);
+            break;
+        case 253:
+            nmem_mov_reg(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 4);
+            break;
+        case 131:
+            reg_mov_mem(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 1);
+            break;
+        case 132:
+            reg_mov_nmem(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 1);
+            break;
+        case 233:
+            reg_mov_mem(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 2);
+            break;
+        case 234:
+            reg_mov_nmem(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 2);
+            break;
+        case 153:
+            reg_mov_mem(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 4);
+            break;
+        case 154:
+            reg_mov_nmem(vm, (unsigned int)((char *)*vm)[1], *(unsigned int *)((char *)*vm + 2), 4);
+            break;
+        case 172:
+            jmp(vm, *(unsigned int *)((char *)*vm + 1));
+            break;
+        case 20:
+            je(vm, *(unsigned int *)((char *)*vm + 1));
+            break;
+        case 164:
+            jne(vm, *(unsigned int *)((char *)*vm + 1));
+            break;
+        case 54:
+            jg(vm, *(unsigned int *)((char *)*vm + 1));
+            break;
+        case 251:
+            jl(vm, *(unsigned int *)((char *)*vm + 1));
+            break;
+        case 115:
+            jge(vm, *(unsigned int *)((char *)*vm + 1));
+            break;
+        case 42:
+            jle(vm, *(unsigned int *)((char *)*vm + 1));
+            break;
+        case 134:
+            smc(vm, (unsigned int)((char *)*vm)[1], 1);
+            break;
+        case 249:
+            smc(vm, (unsigned int)((char *)*vm)[1], 2);
+            break;
+        case 113:
+            smc(vm, (unsigned int)((char *)*vm)[1], 4);
+            break;
+        case 255:
+            return;
+        default:
+            *(unsigned char *)vm = *(unsigned char *)vm - 2;
+            break;
+        }
+        *(unsigned char *)vm = *(unsigned char *)vm + 3;
+    }
 }
 
 void vm(char *key)
 {
-	char		*mem = (char *)malloc(sizeof(char) * 64);
-	char		*stk = (char *)malloc(sizeof(char) * 64);
-	unsigned int	*reg = (unsigned int *)malloc(sizeof(unsigned int) * 8);
-	unsigned int	**vm = (unsigned int * *)malloc(sizeof(unsigned int*) * 4);
+    char        *mem = (char *)malloc(sizeof(char) * 64);
+    char        *stk = (char *)malloc(sizeof(char) * 64);
+    unsigned int    *reg = (unsigned int *)malloc(sizeof(unsigned int) * 8);
+    unsigned int    **vm = (unsigned int * *)malloc(sizeof(unsigned int*) * 4);
 
-	memset(stk, 0, 64);
-	memset(mem, 0, 64);
-	memset(reg, 0, 32);
-	memcpy(mem, key,24);
+    memset(stk, 0, 64);
+    memset(mem, 0, 64);
+    memset(reg, 0, 32);
+    memcpy(mem, key,24);
 
-	*vm = (unsigned int *)opc;
-	*(vm + 1) = (unsigned int *)reg;
-	*(vm + 2) = (unsigned int *)stk + 32;
-	*(vm + 3) = (unsigned int *)mem;
-	vm_handler(vm);
-	memcpy(key, mem, 24);
+    *vm = (unsigned int *)opc;
+    *(vm + 1) = (unsigned int *)reg;
+    *(vm + 2) = (unsigned int *)stk + 32;
+    *(vm + 3) = (unsigned int *)mem;
+    vm_handler(vm);
+    memcpy(key, mem, 24);
 
-	free(mem);
-	free(stk);
-	free(reg);
-	free(vm);
+    free(mem);
+    free(stk);
+    free(reg);
+    free(vm);
 }
 //------------------------------------------------------------------------------------
 
 
 int main()
 {
-	printf("welcome to zsctf!\n");
-	printf("show me your key:");
-	char key[50];
-	scanf("%s", key);
-	if (isdbg())
-		exit(0);
-	if (strlen(key) != 24)
-	{
-		sorry();
-		return 0;
-	}
-	key[16] = key[16] ^ 1;
-	vm(key);
-	for (int i = 0;i < 24;++i)
-	{
-		if (key[i] >= '0'&&key[i] <= '9' || key[i] >= 'a'&&key[i] <= 'f')
-			continue;
-		sorry();
-		return 0;
-	}
-	if (maze_game(key))
-	{
-		printf("done!!!The flag is your input\n");
-		delay(4);
-		print_ticket();
-	}
-	else sorry();
-	return 0;
+    printf("welcome to zsctf!\n");
+    printf("show me your key:");
+    char key[50];
+    scanf("%s", key);
+    if (isdbg())
+        exit(0);
+    if (strlen(key) != 24)
+    {
+        sorry();
+        return 0;
+    }
+    key[16] = key[16] ^ 1;
+    vm(key);
+    for (int i = 0;i < 24;++i)
+    {
+        if (key[i] >= '0'&&key[i] <= '9' || key[i] >= 'a'&&key[i] <= 'f')
+            continue;
+        sorry();
+        return 0;
+    }
+    if (maze_game(key))
+    {
+        printf("done!!!The flag is your input\n");
+        delay(4);
+        print_ticket();
+    }
+    else sorry();
+    return 0;
 }
