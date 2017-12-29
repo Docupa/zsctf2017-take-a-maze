@@ -5,4 +5,4 @@
 ----
 题目的 idea 是通过之前国赛渡师傅的压轴 re 得来的，但是出于考虑学校的状况，将变形 AES 改成了更为简单的迷宫类检验，也将待解释字节码边幅缩短了不少，引入了循环来降低难度。
 
-具体思路戳[这里](https://github.com/Docupa/zsctf2017-take_a_maze/blob/master/idea.md)
+具体思路[在这里](https://github.com/Docupa/zsctf2017-take_a_maze/blob/master/idea.md)
