@@ -1,0 +1,1 @@
+# zsctf2017-take-a-maze
