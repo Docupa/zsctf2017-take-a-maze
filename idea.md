@@ -19,7 +19,7 @@ xor reg,reg5
 mov mem[reg5],reg
 inc reg5
 cmp reg5,reg6
-je 4
+jne 4
 ```
 
 经过定义的解释翻译后得到字节码：
